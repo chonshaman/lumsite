@@ -40,7 +40,7 @@ export const locales = {
         "Built-In Trading Engine",
         "Comprehensive Trading Experience",
         "Community-Led Growth",
-        "Frictionless Deposits",
+        "Multi-chain Onramp",
       ],
     },
     coreFeatures: {
