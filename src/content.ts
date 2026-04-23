@@ -221,7 +221,7 @@ export const locales = {
             "Trading Engine",
             "End-to-End Trading Experience",
             "Community Led Growth",
-            "Flexible Deposit Options",
+            "Multi-chain Onramp",
           ],
         },
         { title: "Partners", links: ["Liquidity Providers", "Business Partners", "Payment Providers"] },
