@@ -56,25 +56,25 @@ export const locales = {
         {
           title: "Built-In Trading Engine",
           tabTitle: "Built-In Trading Engine",
-          body: "A proven, high-performance trading system with secure on-chain settlement. Your users get real price discovery and real liquidity from day one.",
+          body: "Provide professional-grade transparency with a fully visible Central Limit Order Book (CLOB). Display real-time bids, asks, and market depth to enable tighter spreads and sophisticated market-making strategies.",
           image: "/assets/tradingengine.webp",
         },
         {
-          title: "End-to-End Trading Experience",
-          tabTitle: "Comprehensive Trading Experience",
-          body: "From discovery to rewards. A seamless journey designed for continuous engagement.",
+          title: "Secure Smart Contract Settlement",
+          tabTitle: "Secure Smart Contract Settlement",
+          body: "Deploy automated, smart contract-based resolution logic that ensures every market outcome is verified accurately and settled instantly on-chain, eliminating counterparty risk and guaranteeing trustless payouts.",
           image: "/assets/endtoend.webp",
         },
         {
-          title: "Community Led Growth",
-          tabTitle: "Community-Led Growth",
+          title: "User Generated Markets",
+          tabTitle: "User Generated Markets",
           body: "Let your users propose and fund their own markets. Turn your audience into active participants, not just traders.",
           image: "/assets/ledgrowth.webp",
         },
         {
-          title: "Multi-Chain Onramp",
-          tabTitle: "Frictionless Deposits",
-          body: "Accept various tokens and payment methods. Lower the barrier to entry for new users.",
+          title: "Multi-Chain Bridging and Swap",
+          tabTitle: "Multi-Chain Bridging and Swap",
+          body: "Accept various cryptocurrencies for deposits and withdrawals. Lower the barrier to entry for new users.",
           image: "/assets/multichain.webp",
         },
       ],
@@ -84,8 +84,8 @@ export const locales = {
       highlightTitle: "Effortless Operational Control",
       highlightStatement: "Run your platform with confidence\nNo engineering team required.",
       steps: [
-        { title: "Create", body: "User and AI generates market idea" },
-        { title: "Publish", body: "Market goes live" },
+        { title: "Create", body: "Supporting Administration, User, and AI generates markets" },
+        { title: "Publish", body: "Multi-step market verification launch process, and fully automated market launch assisted with AI" },
         { title: "Resolve", body: "Full audit trail log outcome" },
       ],
       cards: [
@@ -95,7 +95,7 @@ export const locales = {
         },
         {
           title: "Platform Analytics",
-          body: "Dashboard with the numbers that matter: trading volume, user growth, active markets - tracked daily, weekly, and over time.",
+          body: "Dashboard with the numbers that matter: trading volume, user growth, active markets, and much more — tracked daily, weekly, and over time.",
         },
         {
           title: "Full Audit Trail",
