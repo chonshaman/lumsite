@@ -73,7 +73,7 @@ export const locales = {
         },
         {
           title: "Multi-Chain Onramp",
-          tabTitle: "Frictionless Deposits",
+          tabTitle: "Multi-Chain Onramp",
           body: "Accept various tokens and payment methods. Lower the barrier to entry for new users.",
           image: "/assets/multichain.webp",
         },
