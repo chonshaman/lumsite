@@ -1,7 +1,7 @@
-import type { content } from "../content";
+import type { SiteContent } from "../content";
 
 type Props = {
-  footer: typeof content.footer;
+  footer: SiteContent["footer"];
 };
 
 export function Footer({ footer }: Props) {
@@ -10,7 +10,7 @@ export function Footer({ footer }: Props) {
       <div className="sectionWrap footerCta reveal">
         <h2>{footer.cta}</h2>
         <a className="button" href={`mailto:${footer.email}`}>
-          Contact us
+          {footer.ctaButton}
         </a>
       </div>
 
@@ -33,7 +33,7 @@ export function Footer({ footer }: Props) {
             <strong>{footer.emailLabel}</strong> <a href={`mailto:${footer.email}`}>{footer.email}</a>
           </p>
           <p>
-            <strong>{footer.socialLabel}</strong> <a href="/">@lumberworks</a>
+            <strong>{footer.socialLabel}</strong> <a href="/">{footer.socialHandle}</a>
           </p>
         </div>
         <p>{footer.description}</p>

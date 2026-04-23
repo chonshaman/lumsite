@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
-import { content } from "../content";
+import type { SiteContent } from "../content";
 
 type HeroProps = {
-  nav: typeof content.nav;
-  hero: typeof content.hero;
+  hero: SiteContent["hero"];
+  ui: SiteContent["ui"];
+  footer: SiteContent["footer"];
 };
 
-export function Hero({ hero }: HeroProps) {
+export function Hero({ hero, ui, footer }: HeroProps) {
   const heroRef = useRef<HTMLElement | null>(null);
   const [shapeIntroDone, setShapeIntroDone] = useState(false);
   const isHeroInView = useInView(heroRef, { amount: 0.4 });
@@ -42,7 +43,7 @@ export function Hero({ hero }: HeroProps) {
   return (
     <header className="hero" ref={heroRef}>
       <a className="skipLink" href="#main">
-        Skip to content
+        {ui.skipToContent}
       </a>
 
       <section className="heroGrid sectionWrap" aria-labelledby="hero-title">
@@ -88,7 +89,7 @@ export function Hero({ hero }: HeroProps) {
             animate={isHeroInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
             transition={{ duration: 0.76, ease: introEase, delay: 0.62 }}
           >
-            <a className="button heroButton" href={`mailto:${content.footer.email}`}>
+            <a className="button heroButton" href={`mailto:${footer.email}`}>
               <span>{hero.cta}</span>
               <span className="buttonArrow" aria-hidden="true">
                 →

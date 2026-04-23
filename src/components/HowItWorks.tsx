@@ -7,10 +7,11 @@ import {
   Rocket01Icon,
   SecurityCheckIcon,
 } from "@hugeicons/core-free-icons";
-import type { content } from "../content";
+import type { SiteContent } from "../content";
+import { Text3DFlip } from "./Text3DFlip";
 
 type Props = {
-  data: typeof content.howItWorks;
+  data: SiteContent["howItWorks"];
 };
 
 export function HowItWorks({ data }: Props) {
@@ -20,7 +21,7 @@ export function HowItWorks({ data }: Props) {
   return (
     <section className="how" aria-labelledby="how-title">
       <h2 id="how-title" className="srOnly">
-        How market operations work
+        {data.title}
       </h2>
       <div className="opsGrid">
         {data.steps.map((step, index) => (
@@ -34,15 +35,11 @@ export function HowItWorks({ data }: Props) {
         ))}
 
         <div className="opsTitle reveal">
-          <h3>Effortless Operational Control</h3>
+          <Text3DFlip as="h3" text={data.highlightTitle} />
         </div>
 
         <div className="opsStatement reveal">
-          <p>
-            Run your platform with confidence
-            <br />
-            No engineering team required.
-          </p>
+          <Text3DFlip as="p" className="opsStatementFlip" text={data.highlightStatement} />
         </div>
 
         {data.cards.map((card, index) => (

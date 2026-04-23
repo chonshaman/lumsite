@@ -12,34 +12,37 @@ import {
   WorkflowSquare10Icon,
   UserGroupIcon,
 } from "@hugeicons/core-free-icons";
-import type { content } from "../content";
+import type { SiteContent } from "../content";
+import { FlickeringGrid } from "./FlickeringGrid";
+import { Text3DFlip } from "./Text3DFlip";
 
 type Props = {
-  data: typeof content.operations;
+  data: SiteContent["operations"];
+  ui: SiteContent["ui"];
 };
 
-export function Operations({ data }: Props) {
+export function Operations({ data, ui }: Props) {
   const [liquidity, ai, growth] = data.sections;
   const liquidityIcons = [DatabaseLightningIcon, UserGroupIcon, DashboardSpeed01Icon];
   const aiIcons = [AiSearch02Icon, CheckmarkCircle03Icon, LicenseDraftIcon];
 
   return (
-    <section className="operations" aria-label="Operational platform features">
+    <section className="operations" aria-label={ui.operationsLabel}>
       <section className="liquiditySection" aria-labelledby="liquidity-title">
         <div className="liquidityInner">
           <header className="liquidityHeader reveal">
             <div>
-              <h2 id="liquidity-title">{liquidity.title}</h2>
+              <Text3DFlip as="h2" id="liquidity-title" text={liquidity.title} />
               {"kicker" in liquidity ? <p>{liquidity.kicker}</p> : null}
               {"body" in liquidity ? <p>{liquidity.body}</p> : null}
             </div>
-            <img src="/assets/imageliquid.webp" alt="" loading="lazy" />
+            <img src={liquidity.image} alt="" loading="lazy" />
           </header>
 
           <div className="liquidityCards">
             {liquidity.cards.map((card, index) => (
               <article className={`liquidityCard liquidityCard${index + 1} reveal`} key={card.title}>
-                <a className="cornerArrow" href="/" aria-label={`Learn more about ${card.title}`}>
+                <a className="cornerArrow" href="/" aria-label={`${ui.learnMoreAbout} ${card.title}`}>
                   →
                 </a>
                 <div className="iconBubble">
@@ -56,8 +59,8 @@ export function Operations({ data }: Props) {
       <section className="aiSection" aria-labelledby="ai-title">
         <div className="aiInner">
           <div className="aiHero reveal">
-            <h2 id="ai-title">{ai.title}</h2>
-            <img src="/assets/imgasbg.webp" alt="" loading="lazy" />
+            <Text3DFlip as="h2" id="ai-title" text={ai.title} />
+            <img src={ai.image} alt="" loading="lazy" />
           </div>
           <div className="aiCards">
             {ai.cards.map((card, index) => (
@@ -78,13 +81,14 @@ export function Operations({ data }: Props) {
   );
 }
 
-function GrowthLoop({ data }: { data: typeof content.operations.sections[2] }) {
+function GrowthLoop({ data }: { data: SiteContent["operations"]["sections"][2] }) {
   const icons = [MailAccount02Icon, WorkflowSquare10Icon, Link01Icon, CoinsSwapIcon, AiGameIcon];
   const cards = data.cards.map((card, index) => ({ ...card, icon: icons[index] }));
   const loopCards = [...cards, ...cards];
 
   return (
     <section className="growthLoopSection" aria-labelledby="growth-title">
+      <FlickeringGrid className="growthFlickerGrid" color="#ddd2ad" gridGap={14} maxOpacity={0.38} squareSize={6} />
       <div className="growthLoopTrack" aria-hidden="true">
         {loopCards.map((card, index) => (
           <article className={`growthLoopCard growthLoopCard${(index % cards.length) + 1}`} key={`${card.title}-${index}`}>

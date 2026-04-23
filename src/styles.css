@@ -157,7 +157,7 @@ input {
   min-width: 272px;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: visible;
   background: #ffffff;
   padding: 20px;
   pointer-events: auto;
@@ -205,6 +205,12 @@ input {
   line-height: 1;
 }
 
+.siteNavChevron {
+  display: inline-flex;
+  align-items: center;
+  color: #2b8d44;
+}
+
 .siteHeaderCta {
   display: inline-flex;
   width: 135px;
@@ -220,6 +226,168 @@ input {
   line-height: 16.8px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.siteHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 32px;
+}
+
+.languageMenu {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.languageTrigger {
+  min-width: 74px;
+  height: 52px;
+  border: 1px solid rgba(17, 21, 26, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #11151a;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 12.9px;
+  font-weight: 700;
+  line-height: 16.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.languageTrigger:hover,
+.languageTrigger:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(43, 141, 68, 0.28);
+  box-shadow: 0 10px 22px rgba(18, 29, 21, 0.06);
+}
+
+.languageTrigger:focus {
+  outline: 2px solid rgba(43, 141, 68, 0.18);
+  outline-offset: 2px;
+}
+
+.languageChevron {
+  display: inline-flex;
+  align-items: center;
+  color: #2b8d44;
+  line-height: 1;
+  transition: transform 160ms ease;
+}
+
+.languageChevron.isOpen {
+  transform: rotate(180deg);
+}
+
+.languageDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  min-width: 74px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 21, 26, 0.08);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 16px 36px rgba(18, 29, 21, 0.12);
+  padding: 6px;
+}
+
+.languageOption {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #11151a;
+  font-family: var(--font-body);
+  font-size: 12.9px;
+  font-weight: 700;
+  line-height: 16.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.languageOption:hover,
+.languageOption:focus-visible,
+.languageOption.isActive {
+  background: rgba(43, 141, 68, 0.1);
+  color: #2b8d44;
+}
+
+.text3dFlip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: inherit;
+  perspective: 1200px;
+}
+
+.text3dFlipLine {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.text3dFlipWord {
+  display: inline-flex;
+  align-items: inherit;
+}
+
+.text3dFlipSpace {
+  width: 0.32em;
+  flex: 0 0 0.32em;
+}
+
+.text3dFlipCharWrap {
+  display: inline-flex;
+  height: 1em;
+  align-items: center;
+  overflow: hidden;
+}
+
+.text3dFlipChar {
+  position: relative;
+  display: inline-flex;
+  height: 1em;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--flip-delay, 0s);
+}
+
+.text3dFlip.isActive .text3dFlipChar {
+  transform: rotateX(90deg);
+}
+
+.text3dFlipFace {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+}
+
+.text3dFlipFaceFront {
+  transform: translateZ(0.45em);
+}
+
+.text3dFlipFaceBack {
+  position: absolute;
+  inset: 0;
+  transform: rotateX(-90deg) translateZ(0.45em);
 }
 
 .hero {
@@ -631,27 +799,34 @@ input {
 .featureTabs {
   display: flex;
   width: min(100%, 1280px);
-  min-height: 68px;
+  min-height: 41px;
   align-items: center;
   justify-content: space-between;
   overflow-x: auto;
   border-radius: 4px;
   background: #ffffff;
-  padding: 24px;
+  padding: 14px 18px;
+  position: sticky;
+  top: 108px;
+  z-index: 30;
+  box-shadow: 0 10px 24px rgba(18, 29, 21, 0.06);
 }
 
 .featureTabs a {
   flex: 0 0 auto;
-  padding: 14px;
+  padding: 8px 10px;
   border-radius: 8px;
   color: rgba(29, 29, 27, 0.8);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 20px;
   letter-spacing: -0.01em;
   opacity: 0.7;
   white-space: nowrap;
+  transition:
+    color 160ms ease,
+    opacity 160ms ease;
 }
 
 .featureTabs a.isActive {
@@ -689,9 +864,12 @@ input {
     0 10px 24px rgba(18, 29, 21, 0),
     0 0 28px rgba(43, 141, 68, 0);
   transition:
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 140ms ease,
+    box-shadow 140ms ease;
+  transition-delay: 0ms;
   transform-origin: center;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
 .featureCard::after {
@@ -898,13 +1076,14 @@ input {
 .darkCard {
   background: white;
   border-radius: 4px;
-  box-shadow:
-    0 10px 24px rgba(18, 29, 21, 0),
-    0 0 28px rgba(43, 141, 68, 0);
+  box-shadow: none;
   transition:
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 140ms ease,
+    box-shadow 140ms ease;
+  transition-delay: 0ms;
   transform-origin: center;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
 .lightCard {
@@ -1019,10 +1198,8 @@ input {
 .step:focus-within,
 .darkCard:hover,
 .darkCard:focus-within {
-  transform: scale(1.05);
-  box-shadow:
-    0 16px 36px rgba(18, 29, 21, 0.12),
-    0 0 28px rgba(43, 141, 68, 0.12);
+  --card-hover-scale: 1.06;
+  box-shadow: 0 12px 34px rgba(30, 60, 38, 0.08);
   z-index: 3;
 }
 
@@ -1073,6 +1250,7 @@ input {
   font-size: 44px;
   line-height: 56px;
   letter-spacing: -0.01em;
+  white-space: pre-line;
 }
 
 .operations {
@@ -1140,6 +1318,8 @@ input {
   width: 100%;
   gap: 16px;
   align-items: stretch;
+
+
 }
 
 .liquidityCard {
@@ -1148,14 +1328,17 @@ input {
   min-width: 0;
   overflow: hidden;
   border-radius: 4px 8px 4px 4px;
-  padding: 144px 24px 24px;
+  padding: 180px 24px 24px;
   transition:
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 140ms ease,
+    box-shadow 140ms ease;
+  transition-delay: 0ms;
   transform-origin: center;
   box-shadow:
     0 10px 24px rgba(18, 29, 21, 0),
     0 0 28px rgba(43, 141, 68, 0);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
 .liquidityCard1 {
@@ -1198,8 +1381,10 @@ input {
 
 .iconBubble {
   display: grid;
+  flex: 0 0 68px;
   width: 68px;
   height: 68px;
+  aspect-ratio: 1 / 1;
   place-items: center;
   border-radius: 50%;
   background: #ffffff;
@@ -1229,6 +1414,8 @@ input {
   font-weight: 400;
   line-height: 20px;
   letter-spacing: -0.01em;
+
+
 }
 
 .aiInner {
@@ -1268,7 +1455,8 @@ input {
 
 .aiCards {
   gap: 4px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+
+
 }
 
 .aiCard {
@@ -1282,13 +1470,15 @@ input {
   border-radius: 4px;
   background: #ffffff;
   padding: 16px;
-  box-shadow:
-    0 10px 24px rgba(18, 29, 21, 0),
-    0 0 28px rgba(43, 141, 68, 0);
+  box-shadow: 0 0 20px 0 rgba(29, 29, 27, 0.10);
+
   transition:
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 140ms ease,
+    box-shadow 140ms ease;
+  transition-delay: 0ms;
   transform-origin: center;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
 .iconBubbleGreen {
@@ -1309,16 +1499,32 @@ input {
 
 .growthLoopSection {
   position: relative;
-  display: flex;
+  display: grid;
   min-height: 917px;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
   overflow: hidden;
   background: radial-gradient(circle at 64% 0%, #ffffff 0%, #fff9ea 54%, #fff9ea 100%);
   padding: 56px;
 }
 
+.growthFlickerGrid {
+  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.flickeringGridCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .growthLoopTrack {
+  grid-area: 1 / 1;
   position: absolute;
   inset: 0;
   display: flex;
@@ -1326,6 +1532,7 @@ input {
   align-items: center;
   gap: 72px;
   animation: growthMarquee 32s linear infinite;
+  z-index: 1;
 }
 
 .growthLoopCard {
@@ -1342,8 +1549,8 @@ input {
     0 10px 24px rgba(18, 29, 21, 0),
     0 0 28px rgba(43, 141, 68, 0);
   transition:
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 180ms ease,
+    box-shadow 180ms ease;
   transform-origin: center;
 }
 
@@ -1378,6 +1585,7 @@ input {
 }
 
 .growthCenterCard {
+  grid-area: 1 / 1;
   position: relative;
   z-index: 2;
   display: flex;
@@ -1438,7 +1646,7 @@ input {
 .pricing {
   display: flex;
   flex-direction: column;
-  gap: 47px;
+  gap: 0px;
   align-items: center;
   justify-content: center;
   padding: 100px 50.5px;
@@ -1497,15 +1705,18 @@ input {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  border-radius: 4px 8px 4px 4px;
+  border-radius: 4px;
   padding-top: 228px;
   transition:
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 140ms ease,
+    box-shadow 140ms ease;
+  transition-delay: 0ms;
   transform-origin: center;
   box-shadow:
     0 10px 24px rgba(18, 29, 21, 0),
     0 0 28px rgba(43, 141, 68, 0);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
 .plan1 {
@@ -1560,7 +1771,7 @@ input {
 
 .plan1 .planImage img {
   width: 364px;
-  transform: translate(18px, 16px) scale(1.14);
+  transform: translateY(16px) scale(1.14);
 }
 
 .plan3 .planImage img {
@@ -1581,39 +1792,21 @@ input {
   padding: 25px;
 }
 
-.planArrowMask {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 3;
-  width: 86px;
-  height: 86px;
-  background: var(--plan-base);
-  clip-path: path("M0 0H86V86H48C39.1634 86 32 78.8366 32 70V54C32 45.1634 24.8366 38 16 38H0V0Z");
-}
-
-.planCornerArrow {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 4;
-  display: grid;
-  width: 48px;
-  height: 48px;
-  place-items: center;
-  border-radius: 8px;
-  background: var(--plan-base);
-  color: #000000;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1;
-}
-
 .plan h3 {
   color: #000000;
   font-size: 32px;
   font-weight: 900;
   line-height: 40px;
+}
+
+.planPrice {
+  margin-top: 8px;
+  color: #2b8d44;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.01em;
 }
 
 .plan ul {
@@ -1729,16 +1922,21 @@ input {
 }
 
 .reveal {
-  transform: translateY(22px);
+  --reveal-y: 22px;
+  --card-hover-scale: 1;
+  translate: 0 var(--reveal-y);
+  scale: var(--card-hover-scale);
   opacity: 0;
   transition:
     opacity 740ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 740ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+    translate 740ms cubic-bezier(0.16, 1, 0.3, 1),
+    scale 140ms ease,
+    box-shadow 140ms ease;
+  will-change: translate, scale, opacity, box-shadow;
 }
 
 .reveal.isVisible {
-  transform: translateY(0);
+  --reveal-y: 0px;
   opacity: 1;
 }
 
@@ -1750,10 +1948,8 @@ input {
 .aiCard:focus-within,
 .plan:hover,
 .plan:focus-within {
-  transform: scale(1.05);
-  box-shadow:
-    0 16px 36px rgba(18, 29, 21, 0.12),
-    0 0 28px rgba(43, 141, 68, 0.12);
+  --card-hover-scale: 1.06;
+  box-shadow: 0 12px 34px rgba(30, 60, 38, 0.08);
   z-index: 3;
 }
 
@@ -1809,12 +2005,12 @@ input {
 }
 
 .featureCard.reveal {
-  transform: translateY(58px);
+  --reveal-y: 58px;
   transition-duration: 860ms;
 }
 
 .featureCard.reveal.isVisible {
-  transform: translateY(0);
+  transition-delay: 0ms;
 }
 
 .featureCard2.reveal {
@@ -1836,14 +2032,19 @@ input {
 .liquidityCard.reveal,
 .aiCard.reveal,
 .plan.reveal {
-  transform: translateY(58px);
+  --reveal-y: 58px;
   transition-duration: 860ms;
 }
 
 .liquidityCard.reveal.isVisible,
 .aiCard.reveal.isVisible,
 .plan.reveal.isVisible {
-  transform: translateY(0);
+  transition:
+    opacity 740ms cubic-bezier(0.16, 1, 0.3, 1),
+    translate 740ms cubic-bezier(0.16, 1, 0.3, 1),
+    scale 140ms ease,
+    box-shadow 140ms ease;
+  transition-delay: 0ms;
 }
 
 .liquidityCard2.reveal,
@@ -2049,8 +2250,22 @@ input {
   .siteHeaderCta {
     width: auto;
     min-width: 104px;
-    margin-left: 12px;
     padding: 0 16px;
+  }
+
+  .siteHeaderActions {
+    gap: 8px;
+    margin-left: 12px;
+  }
+
+  .languageTrigger {
+    min-width: 66px;
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .languageDropdown {
+    min-width: 66px;
   }
 
   .nav {

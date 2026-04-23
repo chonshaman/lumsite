@@ -1,10 +1,12 @@
-import { content } from "../content";
+import type { SiteContent } from "../content";
+import { Text3DFlip } from "./Text3DFlip";
 
 type Props = {
-  pricing: typeof content.pricing;
+  pricing: SiteContent["pricing"];
+  contactEmail: string;
 };
 
-export function Pricing({ pricing }: Props) {
+export function Pricing({ pricing, contactEmail }: Props) {
   return (
     <section className="pricing" id="pricing" aria-labelledby="pricing-title">
       <div className="pricingIntro reveal">
@@ -15,15 +17,12 @@ export function Pricing({ pricing }: Props) {
       <div className="plans">
         {pricing.plans.map((plan, index) => (
           <article className={`plan plan${index + 1} reveal`} key={plan.name}>
-            <div className="planArrowMask" aria-hidden="true" />
-            <a className="planCornerArrow" href={`mailto:${content.footer.email}`} aria-label={`Book ${plan.name} demo`}>
-              →
-            </a>
             <div className="planImage">
               <img src={plan.image} alt="" loading={index === 0 ? "eager" : "lazy"} />
             </div>
             <div className="planBody">
-              <h3>{plan.name}</h3>
+              <Text3DFlip as="h3" text={plan.name} />
+              {"priceLabel" in plan ? <p className="planPrice">{plan.priceLabel}</p> : null}
               <ul>
                 {plan.features.map((feature) => (
                   <li key={feature}>
@@ -32,7 +31,7 @@ export function Pricing({ pricing }: Props) {
                   </li>
                 ))}
               </ul>
-              <a className="planButton" href={`mailto:${content.footer.email}`}>
+              <a className="planButton" href={`mailto:${contactEmail}`}>
                 <span>{plan.cta}</span>
                 <span aria-hidden="true">⊙</span>
               </a>

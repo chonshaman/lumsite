@@ -1,7 +1,7 @@
-import type { content } from "../content";
+import type { SiteContent } from "../content";
 
 type Props = {
-  report: typeof content.report;
+  report: SiteContent["report"];
 };
 
 export function Report({ report }: Props) {
