@@ -301,25 +301,25 @@ export const locales = {
         {
           title: "자체 내장된 트레이딩 엔진",
           tabTitle: "자체 내장된 트레이딩 엔진",
-          body: "안전한 on-chain 결제를 지원하는 검증된 고성능 거래 시스템입니다. 출시 첫날부터 사용자에게 정확한 시장 가격 형성과 실질적인 유동성을 제공합니다.",
+          body: "완전히 공개된 Central Limit Order Book(CLOB)으로 전문 트레이딩 수준의 투명성을 제공합니다. 실시간 호가, 매수/매도 주문, 시장 깊이를 노출해 더 촘촘한 스프레드와 고도화된 마켓 메이킹 전략을 지원합니다.",
           image: "/assets/tradingengine.webp",
         },
         {
-          title: "통합 거래 경험",
-          tabTitle: "통합 거래 경험",
-          body: "포트폴리오 추적, 시장 탐색, 관심 목록, 보상 등 사용자의 첫 방문부터 지속적인 참여를 유도하는 데 필요한 모든 기능을 갖췄습니다.",
+          title: "안전한 스마트 컨트랙트 정산",
+          tabTitle: "안전한 스마트 컨트랙트 정산",
+          body: "자동화된 스마트 컨트랙트 기반 결과 처리 로직을 통해 모든 시장 결과를 정확히 검증하고 온체인에서 즉시 정산합니다. 상대방 리스크를 제거하고 신뢰 없는(trustless) 지급을 보장합니다.",
           image: "/assets/endtoend.webp",
         },
         {
-          title: "커뮤니티 주도형 시장",
-          tabTitle: "커뮤니티 주도형 시장",
+          title: "사용자 생성 시장",
+          tabTitle: "사용자 생성 시장",
           body: "사용자가 직접 시장을 제안하고 자금을 조달할 수 있습니다. 단순한 거래자를 넘어 적극적인 생태계 참여자로 만드세요.",
           image: "/assets/ledgrowth.webp",
         },
         {
-          title: "다양한 입금 옵션",
-          tabTitle: "다양한 입금 옵션",
-          body: "여러 종류의 token과 결제 방식을 지원하여 신규 사용자의 진입 장벽을 대폭 낮춥니다.",
+          title: "멀티체인 브릿지 및 스왑",
+          tabTitle: "멀티체인 브릿지 및 스왑",
+          body: "다양한 암호화폐의 입출금을 지원해 신규 사용자의 진입 장벽을 낮춥니다.",
           image: "/assets/multichain.webp",
         },
       ],
@@ -329,8 +329,8 @@ export const locales = {
       highlightTitle: "개발팀 없이도 안정적으로 플랫폼을 운영하세요.",
       highlightStatement: "직관적인 관리 흐름으로\n시장을 안정적으로 운영하세요.",
       steps: [
-        { title: "시장 생성", body: "사용자와 AI가 시장 아이디어를 생성합니다" },
-        { title: "게시", body: "승인된 시장이 즉시 라이브됩니다" },
+        { title: "시장 생성", body: "관리자, 사용자, AI가 함께 시장 생성을 지원합니다" },
+        { title: "게시", body: "다단계 시장 검증과 AI 지원 자동 출시 프로세스로 시장을 오픈합니다" },
         { title: "결과 처리", body: "모든 처리 내역이 audit trail로 기록됩니다" },
       ],
       cards: [
@@ -340,7 +340,7 @@ export const locales = {
         },
         {
           title: "플랫폼 analytics",
-          body: "거래량, 사용자 증가율, 활성 시장 수 등 핵심 지표를 보여주는 dashboard를 통해 일간, 주간 및 장기적인 성과를 추적할 수 있습니다.",
+          body: "거래량, 사용자 증가율, 활성 시장 수를 포함한 더 다양한 핵심 지표를 dashboard로 제공하며, 일간·주간·장기 성과를 한눈에 추적할 수 있습니다.",
         },
         {
           title: "전체 감사 추적",
