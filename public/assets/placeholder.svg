@@ -1,0 +1,18 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" rx="36" fill="#F4F0E8"/>
+  <rect x="72" y="74" width="1056" height="612" rx="28" fill="#10100F"/>
+  <rect x="122" y="126" width="310" height="36" rx="18" fill="#D8FC63"/>
+  <rect x="122" y="206" width="432" height="26" rx="13" fill="#F8F4EA"/>
+  <rect x="122" y="258" width="360" height="18" rx="9" fill="#8D8B83"/>
+  <rect x="122" y="318" width="956" height="1" fill="#34332F"/>
+  <rect x="122" y="366" width="274" height="192" rx="22" fill="#1D1C19"/>
+  <rect x="464" y="366" width="274" height="192" rx="22" fill="#1D1C19"/>
+  <rect x="804" y="366" width="274" height="192" rx="22" fill="#1D1C19"/>
+  <circle cx="258" cy="462" r="46" fill="#D8FC63"/>
+  <path d="M242 462L254 474L278 446" stroke="#10100F" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="512" y="428" width="178" height="18" rx="9" fill="#F8F4EA"/>
+  <rect x="512" y="472" width="120" height="18" rx="9" fill="#8D8B83"/>
+  <rect x="852" y="418" width="178" height="22" rx="11" fill="#F8F4EA"/>
+  <rect x="852" y="466" width="132" height="18" rx="9" fill="#8D8B83"/>
+  <text x="600" y="650" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#F8F4EA">Replace with production asset</text>
+</svg>
