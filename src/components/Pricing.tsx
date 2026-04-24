@@ -18,7 +18,7 @@ export function Pricing({ pricing, contactEmail }: Props) {
         {pricing.plans.map((plan, index) => (
           <article className={`plan plan${index + 1} reveal`} key={plan.name}>
             <div className="planImage">
-              <img src={plan.image} alt="" loading={index === 0 ? "eager" : "lazy"} />
+              <img src={plan.image} alt="" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
             </div>
             <div className="planBody">
               <Text3DFlip as="h3" text={plan.name} />

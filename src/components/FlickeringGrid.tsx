@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 type Props = {
   squareSize?: number;
@@ -19,21 +19,32 @@ export function FlickeringGrid({
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isInView, setIsInView] = useState(false);
-  const [size, setSize] = useState({ width: 0, height: 0 });
+  const isInViewRef = useRef(false);
+
+  const parseColor = useCallback((value: string) => {
+    const normalized = value.trim();
+    if (normalized.startsWith("#")) {
+      const hex = normalized.slice(1);
+      const expand = (input: string) => input.split("").map((char) => `${char}${char}`).join("");
+      const full = hex.length === 3 ? expand(hex) : hex;
+      const r = Number.parseInt(full.slice(0, 2), 16);
+      const g = Number.parseInt(full.slice(2, 4), 16);
+      const b = Number.parseInt(full.slice(4, 6), 16);
+      return [r, g, b] as const;
+    }
+
+    const rgbMatch = normalized.match(/\d+/g);
+    if (rgbMatch && rgbMatch.length >= 3) {
+      return [Number(rgbMatch[0]), Number(rgbMatch[1]), Number(rgbMatch[2])] as const;
+    }
+
+    return [217, 211, 190] as const;
+  }, []);
 
   const rgbaColor = useMemo(() => {
-    if (typeof window === "undefined") return "rgba(217, 211, 190,";
-    const sample = document.createElement("canvas");
-    sample.width = 1;
-    sample.height = 1;
-    const context = sample.getContext("2d");
-    if (!context) return "rgba(217, 211, 190,";
-    context.fillStyle = color;
-    context.fillRect(0, 0, 1, 1);
-    const [r, g, b] = context.getImageData(0, 0, 1, 1).data;
+    const [r, g, b] = parseColor(color);
     return `rgba(${r}, ${g}, ${b},`;
-  }, [color]);
+  }, [color, parseColor]);
 
   const setupCanvas = useCallback(
     (canvas: HTMLCanvasElement, width: number, height: number) => {
@@ -109,15 +120,20 @@ export function FlickeringGrid({
     const updateCanvasSize = () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
-      setSize({ width, height });
       grid = setupCanvas(canvas, width, height);
     };
 
     updateCanvasSize();
 
     let lastTime = 0;
+    let lastFrameTime = 0;
     const animate = (time: number) => {
-      if (!grid || !isInView) return;
+      if (!grid || !isInViewRef.current) return;
+      if (time - lastFrameTime < 1000 / 18) {
+        animationFrameId = window.requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = time;
       const deltaTime = (time - lastTime) / 1000;
       lastTime = time;
       updateCells(grid.cells, deltaTime);
@@ -129,28 +145,28 @@ export function FlickeringGrid({
     resizeObserver.observe(container);
 
     intersectionObserver = new IntersectionObserver(([entry]) => {
-      setIsInView(entry.isIntersecting);
+      isInViewRef.current = entry.isIntersecting;
+      if (entry.isIntersecting) {
+        lastTime = performance.now();
+        lastFrameTime = 0;
+        animationFrameId = window.requestAnimationFrame(animate);
+      } else if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      }
     });
     intersectionObserver.observe(container);
-
-    if (isInView) {
-      animationFrameId = window.requestAnimationFrame(animate);
-    }
 
     return () => {
       if (animationFrameId) window.cancelAnimationFrame(animationFrameId);
       resizeObserver?.disconnect();
       intersectionObserver?.disconnect();
     };
-  }, [drawGrid, isInView, setupCanvas, updateCells]);
+  }, [drawGrid, setupCanvas, updateCells]);
 
   return (
     <div className={className} ref={containerRef}>
-      <canvas
-        className="flickeringGridCanvas"
-        ref={canvasRef}
-        style={{ width: size.width, height: size.height }}
-      />
+      <canvas className="flickeringGridCanvas" ref={canvasRef} />
     </div>
   );
 }

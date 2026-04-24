@@ -5,6 +5,7 @@ import {
   DashboardSpeed01Icon,
   Idea01Icon,
   Rocket01Icon,
+  SaveMoneyDollarIcon,
   SecurityCheckIcon,
 } from "@hugeicons/core-free-icons";
 import type { SiteContent } from "../content";
@@ -15,11 +16,11 @@ type Props = {
 };
 
 export function HowItWorks({ data }: Props) {
-  const stepIcons = [Idea01Icon, Rocket01Icon, CheckmarkCircle03Icon];
+  const stepIcons = [Idea01Icon, Rocket01Icon, SaveMoneyDollarIcon];
   const cardIcons = [Blockchain05Icon, DashboardSpeed01Icon, SecurityCheckIcon];
 
   return (
-    <section className="how" aria-labelledby="how-title">
+    <section className="how" id="admin-operations" aria-labelledby="how-title">
       <h2 id="how-title" className="srOnly">
         {data.title}
       </h2>
@@ -40,6 +41,7 @@ export function HowItWorks({ data }: Props) {
 
         <div className="opsStatement reveal">
           <Text3DFlip as="p" className="opsStatementFlip" text={data.highlightStatement} />
+          <p className="opsStatementCaption">{data.highlightCaption}</p>
         </div>
 
         {data.cards.map((card, index) => (

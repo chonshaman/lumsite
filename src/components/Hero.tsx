@@ -20,21 +20,40 @@ export function Hero({ hero, ui, footer }: HeroProps) {
   const shape2Y = useSpring(mouseY, { stiffness: 70, damping: 26 });
   const shape3X = useSpring(mouseX, { stiffness: 55, damping: 28 });
   const shape3Y = useSpring(mouseY, { stiffness: 55, damping: 28 });
+  const textEffectRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const introTimer = window.setTimeout(() => setShapeIntroDone(true), 1450);
+    const target = textEffectRef.current;
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!target || !media.matches || reducedMotion.matches) {
+      return () => window.clearTimeout(introTimer);
+    }
+
+    let frame = 0;
     const onPointerMove = (event: PointerEvent) => {
-      const target = document.querySelector<HTMLElement>(".heroTextEffect");
-      if (!target) return;
-      const rect = target.getBoundingClientRect();
-      mouseX.set(event.clientX - rect.left);
-      mouseY.set(event.clientY - rect.top);
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const rect = target.getBoundingClientRect();
+        mouseX.set(event.clientX - rect.left);
+        mouseY.set(event.clientY - rect.top);
+      });
     };
 
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    const onPointerLeave = () => {
+      const rect = target.getBoundingClientRect();
+      mouseX.set(Math.min(rect.width * 0.34, 160));
+      mouseY.set(Math.min(rect.height * 0.4, 120));
+    };
+
+    target.addEventListener("pointermove", onPointerMove, { passive: true });
+    target.addEventListener("pointerleave", onPointerLeave);
     return () => {
+      if (frame) window.cancelAnimationFrame(frame);
       window.clearTimeout(introTimer);
-      window.removeEventListener("pointermove", onPointerMove);
+      target.removeEventListener("pointermove", onPointerMove);
+      target.removeEventListener("pointerleave", onPointerLeave);
     };
   }, [mouseX, mouseY]);
 
@@ -59,6 +78,7 @@ export function Hero({ hero, ui, footer }: HeroProps) {
           <motion.div
             className="heroTextEffect heroIntroReveal"
             aria-labelledby="hero-title"
+            ref={textEffectRef}
             initial={{ clipPath: "inset(0 100% 0 0)", x: -18, opacity: 0 }}
             animate={
               isHeroInView
@@ -83,6 +103,14 @@ export function Hero({ hero, ui, footer }: HeroProps) {
               <h1 id="hero-title">{hero.title}</h1>
             </div>
           </motion.div>
+          <motion.p
+            className="heroCaption heroIntroReveal"
+            initial={{ clipPath: "inset(0 100% 0 0)", x: -18, opacity: 0 }}
+            animate={isHeroInView ? { clipPath: "inset(0 0% 0 0)", x: 0, opacity: 1 } : { clipPath: "inset(0 100% 0 0)", x: -18, opacity: 0 }}
+            transition={{ duration: 0.82, ease: introEase, delay: 0.28 }}
+          >
+            {hero.caption}
+          </motion.p>
           <motion.div
             className="heroActions"
             initial={{ y: 30, opacity: 0 }}
@@ -95,16 +123,6 @@ export function Hero({ hero, ui, footer }: HeroProps) {
                 →
               </span>
             </a>
-            <article className="heroSecurity" aria-labelledby="hero-security-title">
-              <h2 id="hero-security-title">{hero.securityTitle}</h2>
-              <p>{hero.securityCopy}</p>
-              <div className="securityLines" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-                <span />
-              </div>
-            </article>
           </motion.div>
         </div>
 
@@ -115,7 +133,7 @@ export function Hero({ hero, ui, footer }: HeroProps) {
           animate={isHeroInView ? { scale: 1, opacity: 1 } : { scale: 0.92, opacity: 0 }}
           transition={{ duration: 1.45, ease: [0.22, 1, 0.36, 1], delay: 0.24 }}
         >
-          <img src={hero.image} alt="" />
+          <img src={hero.image} alt="" decoding="async" fetchPriority="high" />
         </motion.div>
       </section>
     </header>

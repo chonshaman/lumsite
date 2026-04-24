@@ -103,7 +103,7 @@ export function CoreFeatures({ content, ui }: Props) {
   };
 
   return (
-    <section className="features" id="products" aria-label={ui.productFeaturesLabel} ref={sectionRef}>
+    <section className="features" id="identity" aria-label={ui.productFeaturesLabel} ref={sectionRef}>
       <div className="featureTabs reveal" ref={tabsRef} role="tablist" aria-label={ui.featureTabsLabel}>
         {content.items.map((feature, index) => (
           <a
@@ -123,7 +123,7 @@ export function CoreFeatures({ content, ui }: Props) {
         <div className="featureStack">
           {content.items.map((feature, index) => (
             <article
-              className={`featureCard featureCard${index + 1} reveal`}
+              className={`featureCard featureCard--${feature.theme} featureCard--${feature.size} reveal`}
               id={`feature-${index + 1}`}
               key={feature.title}
             >
@@ -137,7 +137,7 @@ export function CoreFeatures({ content, ui }: Props) {
               <span className="featurePlus" aria-hidden="true">
                 +
               </span>
-              <img src={feature.image} alt="" loading={index === 0 ? "eager" : "lazy"} />
+              <img src={feature.image} alt="" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
             </article>
           ))}
         </div>

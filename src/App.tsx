@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { locales, type Locale } from "./content";
 import { CoreFeatures } from "./components/CoreFeatures";
 import { Footer } from "./components/Footer";
+import { GlobalCollective } from "./components/GlobalCollective";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { HowItWorks } from "./components/HowItWorks";
+import { OtherProducts } from "./components/OtherProducts";
 import { Operations } from "./components/Operations";
 import { Pricing } from "./components/Pricing";
 
@@ -133,6 +135,8 @@ export default function App() {
         <HowItWorks data={content.howItWorks} />
         <Operations data={content.operations} ui={content.ui} />
         <Pricing pricing={content.pricing} contactEmail={content.footer.email} />
+        <OtherProducts data={content.otherProducts} />
+        <GlobalCollective data={content.globalCollective} />
       </main>
       <Footer footer={content.footer} />
     </>
