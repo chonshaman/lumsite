@@ -11,9 +11,10 @@ type HeroProps = {
 export function Hero({ hero, ui, footer }: HeroProps) {
   const heroRef = useRef<HTMLElement | null>(null);
   const [shapeIntroDone, setShapeIntroDone] = useState(false);
+  const [shapesActivated, setShapesActivated] = useState(false);
   const isHeroInView = useInView(heroRef, { amount: 0.4 });
-  const mouseX = useMotionValue(160);
-  const mouseY = useMotionValue(120);
+  const mouseX = useMotionValue(-360);
+  const mouseY = useMotionValue(-360);
   const shape1X = useSpring(mouseX, { stiffness: 90, damping: 24 });
   const shape1Y = useSpring(mouseY, { stiffness: 90, damping: 24 });
   const shape2X = useSpring(mouseX, { stiffness: 70, damping: 26 });
@@ -24,10 +25,11 @@ export function Hero({ hero, ui, footer }: HeroProps) {
 
   useEffect(() => {
     const introTimer = window.setTimeout(() => setShapeIntroDone(true), 1450);
+    const heroNode = heroRef.current;
     const target = textEffectRef.current;
     const media = window.matchMedia("(hover: hover) and (pointer: fine)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!target || !media.matches || reducedMotion.matches) {
+    if (!heroNode || !target || !media.matches || reducedMotion.matches) {
       return () => window.clearTimeout(introTimer);
     }
 
@@ -40,20 +42,17 @@ export function Hero({ hero, ui, footer }: HeroProps) {
         mouseY.set(event.clientY - rect.top);
       });
     };
-
-    const onPointerLeave = () => {
-      const rect = target.getBoundingClientRect();
-      mouseX.set(Math.min(rect.width * 0.34, 160));
-      mouseY.set(Math.min(rect.height * 0.4, 120));
+    const onPointerEnterText = () => {
+      setShapesActivated(true);
     };
 
-    target.addEventListener("pointermove", onPointerMove, { passive: true });
-    target.addEventListener("pointerleave", onPointerLeave);
+    heroNode.addEventListener("pointermove", onPointerMove, { passive: true });
+    target.addEventListener("pointerenter", onPointerEnterText);
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
       window.clearTimeout(introTimer);
-      target.removeEventListener("pointermove", onPointerMove);
-      target.removeEventListener("pointerleave", onPointerLeave);
+      heroNode.removeEventListener("pointermove", onPointerMove);
+      target.removeEventListener("pointerenter", onPointerEnterText);
     };
   }, [mouseX, mouseY]);
 
@@ -94,7 +93,7 @@ export function Hero({ hero, ui, footer }: HeroProps) {
                 <span className="heroIntroShape heroIntroShape3" />
               </div>
             ) : null}
-            <div className={`heroShapes${shapeIntroDone ? " isHoverReady" : ""}`} aria-hidden="true">
+            <div className={`heroShapes${shapeIntroDone && shapesActivated ? " isHoverReady" : ""}`} aria-hidden="true">
               <motion.span className="heroShape heroShape1" style={{ x: shape1X, y: shape1Y }} />
               <motion.span className="heroShape heroShape2" style={{ x: shape2X, y: shape2Y }} />
               <motion.span className="heroShape heroShape3" style={{ x: shape3X, y: shape3Y }} />
