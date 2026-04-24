@@ -104,7 +104,7 @@ function GrowthLoop({ data }: { data: SiteContent["operations"]["sections"][2] }
         ))}
       </div>
       <div className="growthCenterCard reveal">
-        <h2 id="growth-title">{data.title}</h2>
+        <Text3DFlip as="h2" id="growth-title" text={data.title} />
       </div>
     </section>
   );

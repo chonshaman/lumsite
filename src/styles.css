@@ -39,6 +39,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   background: var(--paper);
 }
 
@@ -152,6 +153,7 @@ input {
 }
 
 .siteHeaderBar {
+  position: relative;
   display: flex;
   max-width: 1411px;
   min-width: 272px;
@@ -373,9 +375,158 @@ input {
   color: #2b8d44;
 }
 
+.mobileMenuWrap {
+  position: relative;
+  display: none;
+}
+
+.mobileMenuTrigger {
+  display: inline-flex;
+  width: 52px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(17, 21, 26, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #11151a;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.mobileMenuTrigger:hover,
+.mobileMenuTrigger:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(43, 141, 68, 0.28);
+}
+
+.mobileMegaMenu {
+  position: fixed;
+  top: 110px;
+  left: 50%;
+  right: auto;
+  z-index: 40;
+  display: grid;
+  width: min(88vw, 440px);
+  max-height: min(76vh, 680px);
+  gap: 18px;
+  overflow-y: auto;
+  border: 1px solid rgba(17, 21, 26, 0.08);
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 18px;
+  box-shadow: 0 18px 40px rgba(18, 29, 21, 0.14);
+  transform-origin: top center;
+  translate: -50% 0;
+}
+
+.mobileMegaSection {
+  display: grid;
+  gap: 10px;
+}
+
+.mobileMegaLabel {
+  color: rgba(17, 21, 26, 0.48);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.mobileMegaGrid {
+  display: grid;
+  gap: 6px;
+}
+
+.mobileMegaItem {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.mobileMegaItem:hover,
+.mobileMegaItem:focus-visible,
+.mobileMegaQuickLinks a:hover,
+.mobileMegaQuickLinks a:focus-visible {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.mobileMegaIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #142033;
+}
+
+.mobileMegaTitle,
+.mobileMegaBody {
+  display: block;
+  min-width: 0;
+}
+
+.mobileMegaTitle {
+  color: #11151a;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+}
+
+.mobileMegaBody {
+  color: rgba(0, 0, 0, 0.62);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.mobileMegaQuickLinks {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-block: 8px;
+}
+
+.mobileMegaQuickLinks a {
+  color: inherit;
+}
+
+.mobileMegaQuickItem {
+  min-height: 54px;
+}
+
+.mobileMegaLanguages > div {
+  display: flex;
+  gap: 8px;
+}
+
+.mobileMegaLanguages button {
+  min-width: 72px;
+  height: 40px;
+  border: 1px solid rgba(17, 21, 26, 0.1);
+  border-radius: 10px;
+  background: #ffffff;
+  color: #11151a;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.mobileMegaLanguages button.isActive,
+.mobileMegaLanguages button:hover,
+.mobileMegaLanguages button:focus-visible {
+  border-color: rgba(43, 141, 68, 0.28);
+  background: rgba(43, 141, 68, 0.1);
+  color: #2b8d44;
+}
+
 .megaMenu {
-  position: absolute;
-  top: calc(100% + 18px);
+  position: fixed;
+  top: 110px;
   left: 50%;
   z-index: 30;
   display: grid;
@@ -450,61 +601,64 @@ input {
   display: inline-flex;
   flex-direction: column;
   align-items: inherit;
-  perspective: 1200px;
-  contain: layout style paint;
+  gap: 0.08em;
+  letter-spacing: -0.02em;
+  max-width: 100%;
 }
 
 .text3dFlipLine {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.text3dFlipWord {
-  display: inline-flex;
+  display: block;
   align-items: inherit;
+  cursor: pointer;
+  white-space: pre-wrap;
 }
 
-.text3dFlipSpace {
-  width: 0.32em;
-  flex: 0 0 0.32em;
+.textLetterGlowWord {
+  display: inline-block;
+  white-space: nowrap;
 }
 
-.text3dFlipCharWrap {
-  display: inline-flex;
-  height: 1em;
-  align-items: center;
-  overflow: hidden;
+.textLetterGlowWord:not(:last-child)::after {
+  content: "\00a0";
 }
 
-.text3dFlipChar {
-  position: relative;
-  display: inline-flex;
-  height: 1em;
-  transform-style: preserve-3d;
-  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: var(--flip-delay, 0s);
-  will-change: transform;
+.textLetterGlowChar {
+  display: inline-block;
+  opacity: 1;
 }
 
-.text3dFlip.isActive .text3dFlipChar {
-  transform: rotateX(90deg);
+.textLetterGlow.isActive .textLetterGlowChar,
+.textLetterGlow:hover .textLetterGlowChar {
+  animation: letterGlow 0.7s cubic-bezier(0.19, 1, 0.22, 1) both;
+  animation-delay: min(calc(var(--letter-index) * 0.035s), 0.9s);
 }
 
-.text3dFlipFace {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  backface-visibility: hidden;
+@keyframes letterGlow {
+  0% {
+    opacity: 0;
+    text-shadow: 0 0 1px color-mix(in srgb, currentColor 18%, transparent);
+    transform: translateY(0.18em);
+  }
+
+  58% {
+    opacity: 1;
+    text-shadow: 0 0 0.5em color-mix(in srgb, currentColor 62%, transparent);
+  }
+
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 0 color-mix(in srgb, currentColor 0%, transparent);
+    transform: translateY(0);
+  }
 }
 
-.text3dFlipFaceFront {
-  transform: translateZ(0.45em);
-}
-
-.text3dFlipFaceBack {
-  position: absolute;
-  inset: 0;
-  transform: rotateX(-90deg) translateZ(0.45em);
+@media (prefers-reduced-motion: reduce) {
+  .textLetterGlow.isActive .textLetterGlowChar,
+  .textLetterGlow:hover .textLetterGlowChar {
+    animation: none;
+    text-shadow: none;
+    transform: none;
+  }
 }
 
 .hero {
@@ -920,6 +1074,12 @@ input {
   top: 108px;
   z-index: 30;
   box-shadow: 0 10px 24px rgba(18, 29, 21, 0.06);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.featureTabs::-webkit-scrollbar {
+  display: none;
 }
 
 .featureTabs a {
@@ -949,6 +1109,7 @@ input {
   width: min(100%, 1280px);
   gap: 48px;
   align-items: flex-start;
+  margin-bottom: 60px;
 }
 
 .featureStack {
@@ -1185,7 +1346,7 @@ input {
   inset: 0 88px auto;
   z-index: 0;
   pointer-events: none;
-}
+  }
 
 .opsDashboardPerspective {
   perspective: 1800px;
@@ -1503,7 +1664,7 @@ input {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: minmax(250px, auto) 290px minmax(257px, auto);
   gap: 4px;
-  margin-top: 156px;
+  margin-top: 220px;
 }
 
 .step,
@@ -2293,6 +2454,7 @@ input {
 
 .globalGlobeFrame {
   position: relative;
+  --globe-scroll-scale: 1.5;
   width: 100%;
   max-width: 495px;
   aspect-ratio: 495 / 523;
@@ -2301,6 +2463,9 @@ input {
   cursor: grab;
   touch-action: none;
   contain: layout paint;
+  transform: scale(var(--globe-scroll-scale));
+  transform-origin: center;
+  transition: transform 120ms linear;
 }
 
 .globalGlobeFrame.isDragging {
@@ -2652,6 +2817,11 @@ input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .globalGlobeFrame {
+    transform: none;
+    transition: none;
+  }
+
   .text3dFlipChar,
   .heroIntroShape,
   .heroShapes,
@@ -2982,7 +3152,45 @@ input {
   }
 }
 
-@media (min-width: 1020px) {
+@media (min-width: 1020px) and (max-width: 1199px) {
+  .hero {
+    padding-top: 92px;
+  }
+
+  .heroCopy {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 0;
+  }
+
+  .heroGrid {
+    grid-template-columns: minmax(330px, 0.86fr) minmax(520px, 1.14fr);
+    gap: 28px;
+    padding: 72px 0 64px;
+  }
+
+  .heroTextEffect {
+    overflow: visible;
+  }
+
+  .heroTextMask h1 {
+    max-width: 9.5ch;
+    font-size: clamp(3rem, 6vw, 3.85rem);
+    line-height: 1.12;
+  }
+
+  .heroCaption {
+    max-width: 340px;
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .heroVisual {
+    width: min(100%, 620px);
+  }
+}
+
+@media (min-width: 1200px) {
   .heroCopy {
     padding-left: 72px;
     padding-right: 0;
@@ -3008,7 +3216,176 @@ input {
   }
 }
 
+@media (max-width: 1180px) {
+  .how {
+    padding: 128px 32px;
+  }
+
+  .howInner {
+    padding-top: 340px;
+  }
+
+  .opsDashboardFrame {
+    inset: 0 24px auto;
+  }
+
+  .opsDashboardSurface {
+    height: 420px;
+    transform: rotateX(22deg) scale(1.04);
+  }
+
+  .opsGrid {
+    gap: 4px;
+    margin-top: 190px;
+  }
+
+  .opsTitle,
+  .step,
+  .darkCard {
+    padding: 28px;
+  }
+
+  .opsStatement {
+    padding: 36px 24px;
+  }
+
+  .opsStatement p {
+    font-size: 38px;
+    line-height: 50px;
+  }
+}
+
 @media (max-width: 980px) {
+  .siteNav {
+    display: none;
+  }
+
+  .languageMenu {
+    display: none;
+  }
+
+  .mobileMenuWrap {
+    display: inline-flex;
+  }
+
+  .siteHeaderActions {
+    margin-left: 16px;
+  }
+
+  .siteHeaderCta {
+    margin-left: 0;
+  }
+
+  .features {
+    padding: 64px 24px;
+  }
+
+  .featureTabs {
+    justify-content: flex-start;
+    gap: 8px;
+    scroll-padding-inline: 18px;
+  }
+
+  .featureLayout {
+    display: grid;
+    gap: 36px;
+  }
+
+  .featureStack {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .featureStory {
+    position: static;
+    padding: 8px 0 0;
+  }
+
+  .how {
+    padding: 112px 24px;
+  }
+
+  .howInner {
+    padding-top: 320px;
+  }
+
+  .opsDashboardFrame {
+    inset: 0 8px auto;
+  }
+
+  .opsDashboardSurface {
+    height: 390px;
+    transform: rotateX(22deg) scale(1.06);
+  }
+
+  .opsDashboardHeader {
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  }
+
+  .opsDashboardMeta {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+  }
+
+  .opsDashboardMetrics--5,
+  .opsDashboardMetrics--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .opsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 14px;
+    margin-top: 240px;
+  }
+
+  .opsStatement {
+    grid-column: span 2;
+    padding: 36px 56px;
+  }
+
+  .opsTitle,
+  .step,
+  .darkCard {
+    padding: 28px;
+  }
+
+  .liquiditySection,
+  .aiSection {
+    padding: 80px 24px;
+  }
+
+  .liquidityHeader {
+    display: grid;
+    align-items: start;
+  }
+
+  .liquidityHeader h2 {
+    white-space: normal;
+  }
+
+  .liquidityHeader img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .liquidityCards,
+  .aiCards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aiHero h2 {
+    width: min(100%, 520px);
+  }
+
+  .plans {
+    display: grid;
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
   .otherProducts {
     padding: 72px 16px;
   }
@@ -3087,30 +3464,31 @@ input {
   }
 
   .siteHeaderBar {
-    padding: 14px 16px;
+    padding: 14px 12px;
   }
 
   .siteLogo {
-    width: 210px;
+    width: min(64vw, 280px);
+    height: 48px;
   }
 
   .siteLogoImage {
-    width: 210px;
-  }
-
-  .siteNav {
-    display: none;
+    width: min(64vw, 280px);
+    height: 48px;
   }
 
   .siteHeaderCta {
-    width: auto;
-    min-width: 104px;
-    padding: 0 16px;
+    display: none;
+  }
+
+  .mobileMenuTrigger {
+    width: 48px;
+    height: 48px;
   }
 
   .siteHeaderActions {
     gap: 8px;
-    margin-left: 12px;
+    margin-left: auto;
   }
 
   .globalCollectiveInner {
@@ -3130,14 +3508,12 @@ input {
     max-width: 100%;
   }
 
-  .languageTrigger {
-    min-width: 66px;
-    height: 44px;
-    padding: 0 12px;
-  }
-
-  .languageDropdown {
-    min-width: 66px;
+  .mobileMegaMenu {
+    left: 50%;
+    right: auto;
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 116px);
+    padding: 14px;
   }
 
   .nav {
@@ -3161,12 +3537,27 @@ input {
     padding: 48px 16px;
   }
 
+  .featureTabs {
+    width: calc(100vw - 32px);
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    scroll-padding-inline: 12px;
+  }
+
+  .featureTabs a {
+    padding: 8px 10px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
   .featureLayout {
     display: grid;
-    gap: 32px;
+    gap: 96px;
   }
 
   .featureStack {
+    order: 2;
     width: 100%;
     flex-basis: auto;
   }
@@ -3192,6 +3583,7 @@ input {
   }
 
   .featureStory {
+    order: 1;
     position: static;
     padding: 0;
   }
@@ -3207,21 +3599,36 @@ input {
   }
 
   .how {
-    padding: 120px 16px;
+    padding: 140px 16px 96px;
   }
 
   .howInner {
-    padding-top: 280px;
+    display: block;
+    padding-top: 0;
   }
 
   .opsDashboardFrame {
-    inset: 0 16px auto;
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    width: min(70%, 273px);
+    height: 364px;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .opsDashboardPerspective {
+    height: 100%;
+    perspective: 1200px;
+    perspective-origin: 50% 0%;
   }
 
   .opsDashboardSurface {
-    height: 220px;
+    height: 364px;
     border-width: 10px;
-    transform: rotateX(66deg) scale(1);
+    border-radius: 28px;
+    transform: rotateX(24deg) scale(1);
+    transform-origin: top center;
   }
 
   .opsDashboardHeader,
@@ -3243,8 +3650,8 @@ input {
   }
 
   .opsMetricCard {
-    min-height: 124px;
-    padding: 16px;
+    min-height: 120px;
+    padding: 14px;
   }
 
   .opsMetricCard strong {
@@ -3254,14 +3661,16 @@ input {
   }
 
   .opsGrid {
+    position: relative;
+    z-index: 2;
     grid-template-columns: 1fr;
     grid-template-rows: none;
-    margin-top: 36px;
+    margin-top: -104px;
   }
 
   .opsStatement {
     grid-column: auto;
-    padding: 32px 24px;
+    padding: 40px 28px;
   }
 
   .opsTitle,
@@ -3270,13 +3679,13 @@ input {
   }
 
   .opsTitle h3 {
-    font-size: 40px;
-    line-height: 48px;
+    font-size: 36px;
+    line-height: 44px;
   }
 
   .opsStatement p {
-    font-size: 32px;
-    line-height: 42px;
+    font-size: 28px;
+    line-height: 38px;
   }
 
   .liquiditySection,
@@ -3312,14 +3721,15 @@ input {
   .liquidityCards,
   .aiCards {
     display: grid;
+    grid-template-columns: 1fr;
   }
 
   .liquidityCard {
-    padding: 120px 20px 24px;
+    padding: 140px 20px 24px;
   }
 
   .liquidityCard .iconBubble {
-    top: 72px;
+    top: 36px;
     left: 20px;
   }
 
@@ -3354,6 +3764,7 @@ input {
 
   .growthLoopTrack {
     gap: 32px;
+    animation-duration: 52s;
   }
 
   .growthLoopCard {

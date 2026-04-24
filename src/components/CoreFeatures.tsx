@@ -49,6 +49,14 @@ export function CoreFeatures({ content, ui }: Props) {
   }, [featureIds]);
 
   useEffect(() => {
+    const tabs = tabsRef.current;
+    if (!tabs || !window.matchMedia("(max-width: 720px)").matches) return;
+
+    const activeTab = tabs.querySelector<HTMLAnchorElement>(`a[href="#${featureIds[activeIndex]}"]`);
+    activeTab?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [activeIndex, featureIds]);
+
+  useEffect(() => {
     const section = sectionRef.current;
     const tabs = tabsRef.current;
     if (!section || !tabs) return;

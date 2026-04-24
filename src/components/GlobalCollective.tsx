@@ -28,6 +28,7 @@ const locationVectors = locations.map((item) => {
 });
 
 export function GlobalCollective({ data }: Props) {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const globeFrameRef = useRef<HTMLDivElement | null>(null);
   const tagRefs = useRef<Record<string, HTMLSpanElement | null>>({});
@@ -219,8 +220,43 @@ export function GlobalCollective({ data }: Props) {
     };
   }, []);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const frame = globeFrameRef.current;
+    if (!section || !frame) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    let animationFrame = 0;
+
+    const updateScale = () => {
+      animationFrame = 0;
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const progress = Math.min(1, Math.max(0, (viewportHeight - rect.top) / (viewportHeight * 0.72)));
+      const scale = 1.5 - progress * 0.5;
+      frame.style.setProperty("--globe-scroll-scale", scale.toFixed(3));
+    };
+
+    const onScroll = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateScale);
+    };
+
+    updateScale();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
-    <section className="globalCollective" id="company" aria-labelledby="company-title">
+    <section className="globalCollective" id="company" aria-labelledby="company-title" ref={sectionRef}>
       <div className="globalCollectiveInner reveal">
         <div className="globalGlobePanel">
           <div className="globalGlobeFrame" ref={globeFrameRef}>

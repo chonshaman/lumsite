@@ -4,8 +4,12 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ArrowDown01Icon,
   AtomicPowerIcon,
+  Briefcase01Icon,
+  Cancel01Icon,
   CoinsSwapIcon,
   DashboardCircleAddIcon,
+  DollarCircleIcon,
+  Menu01Icon,
   NanoTechnologyIcon,
   StarsIcon,
   UserAdd02Icon,
@@ -24,8 +28,10 @@ export function Header({ locale, nav, ui, onLocaleChange }: Props) {
   const [tabsDocked, setTabsDocked] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const languageRef = useRef<HTMLDivElement | null>(null);
   const productsRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -76,12 +82,16 @@ export function Header({ locale, nav, ui, onLocaleChange }: Props) {
       if (!productsRef.current?.contains(event.target as Node)) {
         setProductsOpen(false);
       }
+      if (!mobileMenuRef.current?.contains(event.target as Node)) {
+        setMobileMenuOpen(false);
+      }
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setLanguageOpen(false);
         setProductsOpen(false);
+        setMobileMenuOpen(false);
       }
     };
 
@@ -101,6 +111,7 @@ export function Header({ locale, nav, ui, onLocaleChange }: Props) {
     referrals: UserAdd02Icon,
     nano: NanoTechnologyIcon,
   } as const;
+  const mobileLinkIcons = [Briefcase01Icon, DollarCircleIcon];
 
   return (
     <motion.header
@@ -232,6 +243,97 @@ export function Header({ locale, nav, ui, onLocaleChange }: Props) {
                 ))}
               </div>
             ) : null}
+          </div>
+
+          <div className="mobileMenuWrap" ref={mobileMenuRef}>
+            <button
+              aria-expanded={mobileMenuOpen}
+              aria-haspopup="menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              className="mobileMenuTrigger"
+              onClick={() => {
+                setMobileMenuOpen((open) => !open);
+                setProductsOpen(false);
+                setLanguageOpen(false);
+              }}
+              type="button"
+            >
+              <HugeiconsIcon icon={mobileMenuOpen ? Cancel01Icon : Menu01Icon} size={24} color="currentColor" strokeWidth={1.8} />
+            </button>
+
+            <AnimatePresence>
+              {mobileMenuOpen ? (
+                <motion.div
+                  animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                  className="mobileMegaMenu"
+                  exit={{ opacity: 0, y: -8, scaleY: 0.96 }}
+                  initial={{ opacity: 0, y: -8, scaleY: 0.96 }}
+                  role="menu"
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="mobileMegaSection">
+                    <p className="mobileMegaLabel">Products</p>
+                    <div className="mobileMegaGrid">
+                      {nav.productMenu?.map((item) => {
+                        const icon = productMenuIcons[item.icon as keyof typeof productMenuIcons];
+                        return (
+                          <a
+                            className="mobileMegaItem"
+                            href={item.href}
+                            key={item.title}
+                            onClick={() => setMobileMenuOpen(false)}
+                            role="menuitem"
+                          >
+                            <span className="mobileMegaIcon" aria-hidden="true">
+                              <HugeiconsIcon icon={icon} size={22} color="currentColor" strokeWidth={1.5} />
+                            </span>
+                            <span>
+                              <span className="mobileMegaTitle">{item.title}</span>
+                              {"body" in item && item.body ? <span className="mobileMegaBody">{item.body}</span> : null}
+                            </span>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="mobileMegaSection mobileMegaQuickLinks">
+                    {nav.links
+                      .filter((link) => !link.hasDropdown)
+                      .map((link, index) => (
+                        <a className="mobileMegaItem mobileMegaQuickItem" href={link.href} key={link.label} onClick={() => setMobileMenuOpen(false)} role="menuitem">
+                          <span className="mobileMegaIcon" aria-hidden="true">
+                            <HugeiconsIcon icon={mobileLinkIcons[index]} size={22} color="currentColor" strokeWidth={1.5} />
+                          </span>
+                          <span>
+                            <span className="mobileMegaTitle">{link.label}</span>
+                          </span>
+                        </a>
+                      ))}
+                  </div>
+
+                  <div className="mobileMegaSection mobileMegaLanguages" aria-label={ui.languageLabel}>
+                    <p className="mobileMegaLabel">{ui.languageLabel}</p>
+                    <div>
+                      {(["en", "kr"] as Locale[]).map((option) => (
+                        <button
+                          aria-pressed={locale === option}
+                          className={locale === option ? "isActive" : ""}
+                          key={option}
+                          onClick={() => {
+                            onLocaleChange(option);
+                            setMobileMenuOpen(false);
+                          }}
+                          type="button"
+                        >
+                          {ui.languages[option]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
           </div>
         </div>
       </motion.div>
