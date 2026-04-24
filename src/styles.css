@@ -1171,7 +1171,319 @@ input {
   display: flex;
   justify-content: center;
   background: #f4f4f6;
-  padding: 80px 50.5px;
+  padding: 160px 50.5px;
+}
+
+.howInner {
+  position: relative;
+  width: min(100%, 1280px);
+  padding-top: 280px;
+}
+
+.opsDashboardFrame {
+  position: absolute;
+  inset: 0 88px auto;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.opsDashboardPerspective {
+  perspective: 1800px;
+  perspective-origin: 50% 0%;
+}
+
+.opsDashboardSurface {
+  height: 560px;
+  overflow: hidden;
+  border: 18px solid rgba(0, 0, 0, 0.05);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 70% 0%, rgba(204, 120, 92, 0.08), transparent 22%),
+    radial-gradient(circle at 10% 100%, rgba(124, 111, 171, 0.06), transparent 18%),
+    linear-gradient(180deg, #fffdfa 0%, #fffdfa 100%);
+  box-shadow: 0 30px 90px rgba(26, 22, 18, 0.08);
+  transform: rotateX(20deg) scale(0.9);
+  transform-origin: top center;
+}
+
+.opsDashboardScroller {
+  display: flex;
+  flex-direction: column;
+  animation: opsDashboardLoop 22s linear infinite;
+}
+
+.opsDashboardBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.opsDashboardHeader {
+  display: grid;
+  grid-template-columns: 306px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid #d8d0c4;
+  background: rgba(253, 250, 244, 0.88);
+  padding: 24px 40px 25px;
+}
+
+.opsDashboardAdmin {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 15px;
+  border: 1px solid #d8d0c4;
+  border-radius: 10px;
+  background: #fdfaf4;
+  box-shadow: 0 1px 3px rgba(26, 22, 18, 0.06), 0 1px 2px rgba(26, 22, 18, 0.04);
+}
+
+.opsDashboardAdminBadge {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #cc785c 0%, #7c6fab 100%);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.opsDashboardAdmin span,
+.opsDashboardTitle p,
+.opsDashboardSectionTitle span,
+.opsMetricCard p,
+.opsMetricDelta {
+  font-family: var(--font-body);
+}
+
+.opsDashboardAdmin span {
+  display: block;
+  color: #9a9188;
+  font-size: 10px;
+  line-height: 13px;
+}
+
+.opsDashboardAdmin strong {
+  display: block;
+  color: #1a1612;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.opsDashboardTitle h3 {
+  color: #1a1612;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.3px;
+}
+
+.opsDashboardTitle p {
+  margin-top: 2px;
+  color: #9a9188;
+  font-size: 12.5px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.opsDashboardMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.opsDashboardLive,
+.opsDashboardStamp,
+.opsDashboardRefresh,
+.opsDashboardSectionTitle span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border: 1px solid #d8d0c4;
+  border-radius: 20px;
+  color: #9a9188;
+  font-size: 11px;
+  line-height: 1;
+  background: #ede8df;
+}
+
+.opsDashboardLive {
+  border-color: rgba(74, 140, 111, 0.2);
+  background: rgba(74, 140, 111, 0.1);
+  color: #4a8c6f;
+  text-transform: uppercase;
+}
+
+.opsDashboardLive::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4a8c6f;
+}
+
+.opsDashboardRefresh {
+  padding: 9px 17px;
+  border-radius: 8px;
+  color: #5c554a;
+  background: #fdfaf4;
+  box-shadow: 0 1px 3px rgba(26, 22, 18, 0.06), 0 1px 2px rgba(26, 22, 18, 0.04);
+}
+
+.opsDashboardSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 36px 40px 20px;
+}
+
+.opsDashboardSectionTitle span:first-child {
+  color: #5c554a;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+}
+
+.opsDashboardSectionTitle div {
+  flex: 1 1 auto;
+  height: 1px;
+  background: #d8d0c4;
+}
+
+.opsDashboardMetrics {
+  display: grid;
+  gap: 14px;
+  padding: 0 40px 18px;
+}
+
+.opsDashboardMetrics--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.opsDashboardMetrics--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.opsDashboardMetrics--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.opsMetricCard {
+  position: relative;
+  min-height: 154px;
+  overflow: hidden;
+  border: 1px solid #e8e2d9;
+  border-radius: 16px;
+  background: #fdfaf4;
+  box-shadow: 0 1px 3px rgba(26, 22, 18, 0.06), 0 1px 2px rgba(26, 22, 18, 0.04);
+  padding: 23px 23px 25px;
+}
+
+.opsMetricCard::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 80px;
+  height: 40px;
+  border-right: 2px solid rgba(210, 203, 193, 0.7);
+  border-bottom: 2px solid rgba(210, 203, 193, 0.7);
+  border-bottom-right-radius: 16px;
+  clip-path: polygon(0 100%, 55% 70%, 75% 82%, 100% 30%, 100% 100%);
+  opacity: 0.8;
+}
+
+.opsMetricIcon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 9px;
+  margin-bottom: 13px;
+}
+
+.opsMetricCard--rose .opsMetricIcon,
+.opsMetricDelta--down {
+  background: rgba(184, 84, 80, 0.12);
+  color: #b85450;
+}
+
+.opsMetricCard--blue .opsMetricIcon {
+  background: rgba(74, 111, 168, 0.12);
+  color: #4a6fa8;
+}
+
+.opsMetricCard--green .opsMetricIcon,
+.opsMetricDelta--up,
+.opsMetricDelta--live {
+  background: rgba(74, 140, 111, 0.12);
+  color: #4a8c6f;
+}
+
+.opsMetricCard--violet .opsMetricIcon,
+.opsMetricDelta--flat {
+  background: rgba(124, 111, 171, 0.12);
+  color: #7c6fab;
+}
+
+.opsMetricCard--amber .opsMetricIcon {
+  background: rgba(196, 156, 66, 0.12);
+  color: #c49c42;
+}
+
+.opsMetricCard h4 {
+  color: #5c554a;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.opsMetricCard p {
+  margin-top: 6px;
+  color: #9a9188;
+  font-size: 11.5px;
+  line-height: 17px;
+}
+
+.opsMetricCard strong {
+  display: block;
+  margin-top: 18px;
+  color: #1a1612;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.5px;
+}
+
+.opsMetricCard--rose strong {
+  color: #b85450;
+}
+
+.opsMetricCard--green strong {
+  color: #4a8c6f;
+}
+
+.opsMetricDelta {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 2px 7px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .srOnly {
@@ -1184,11 +1496,14 @@ input {
 }
 
 .opsGrid {
+  position: relative;
+  z-index: 2;
   display: grid;
   width: min(100%, 1280px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: minmax(250px, auto) 290px minmax(257px, auto);
   gap: 4px;
+  margin-top: 156px;
 }
 
 .step,
@@ -2620,6 +2935,16 @@ input {
   }
 }
 
+@keyframes opsDashboardLoop {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -2882,12 +3207,56 @@ input {
   }
 
   .how {
-    padding: 48px 16px;
+    padding: 120px 16px;
+  }
+
+  .howInner {
+    padding-top: 280px;
+  }
+
+  .opsDashboardFrame {
+    inset: 0 16px auto;
+  }
+
+  .opsDashboardSurface {
+    height: 220px;
+    border-width: 10px;
+    transform: rotateX(66deg) scale(1);
+  }
+
+  .opsDashboardHeader,
+  .opsDashboardSectionTitle,
+  .opsDashboardMetrics {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .opsDashboardHeader {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .opsDashboardMetrics--5,
+  .opsDashboardMetrics--4,
+  .opsDashboardMetrics--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .opsMetricCard {
+    min-height: 124px;
+    padding: 16px;
+  }
+
+  .opsMetricCard strong {
+    margin-top: 12px;
+    font-size: 20px;
+    line-height: 20px;
   }
 
   .opsGrid {
     grid-template-columns: 1fr;
     grid-template-rows: none;
+    margin-top: 36px;
   }
 
   .opsStatement {

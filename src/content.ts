@@ -139,6 +139,47 @@ export const locales = {
       highlightTitle: "Admin and Operations System",
       highlightStatement: "Run your platform with confidence\nNo engineering team required.",
       highlightCaption: "We provide a complete back-office suite to manage liquidity, users, and settlement.",
+      dashboard: {
+        adminRole: "Super Admin",
+        adminName: "admin",
+        title: "Dashboard Report",
+        subtitle: "Overview of all market making performance metrics",
+        status: "Live",
+        updated: "Updated just now",
+        refresh: "Refresh",
+        sections: [
+          {
+            title: "Financial Performance",
+            metricCount: "5 metrics",
+            cards: [
+              { title: "Total Realized PnL", body: "Realized profit/loss across all MM accounts", value: "-$51.74", trend: "down", delta: "12.4%", accent: "rose" },
+              { title: "Unrealized PnL", body: "Unrealized profit/loss across all MM accounts", value: "-$203.18", trend: "down", delta: "8.7%", accent: "rose" },
+              { title: "Trading Volume", body: "Total USD traded across all MM markets", value: "$4,871.22", trend: "up", delta: "34.2%", accent: "blue" },
+              { title: "Redeemed / Merged", body: "Total USD redeemed/merged by MM accounts", value: "$347.09", trend: "up", delta: "6.1%", accent: "green" },
+              { title: "Order Filled", body: "Total USD filled by internal bot across all MM accounts", value: "$589.33", trend: "up", delta: "19.8%", accent: "violet" },
+            ],
+          },
+          {
+            title: "Capital Management",
+            metricCount: "4 metrics",
+            cards: [
+              { title: "Total MM Capital", body: "Available balance + open orders + position cost", value: "$1,284.67", trend: "up", delta: "2.3%", accent: "amber" },
+              { title: "Available Balance", body: "Total available USD for trading", value: "$762.44", trend: "flat", delta: "0.1%", accent: "green" },
+              { title: "Total Position Cost", body: "Sum of entry bet amount across all MM accounts", value: "$218.85", trend: "down", delta: "3.4%", accent: "blue" },
+              { title: "Total Open Orders", body: "Total USD value of open orders across all MM accounts", value: "$303.38", trend: "up", delta: "11.7%", accent: "violet" },
+            ],
+          },
+          {
+            title: "Market Statistics",
+            metricCount: "3 metrics",
+            cards: [
+              { title: "Total Seeded Markets", body: "Total number of markets seeded by MM", value: "117", trend: "up", delta: "26.1%", accent: "rose" },
+              { title: "Live Seeded Markets", body: "Number of seeded markets currently live", value: "68", trend: "live", delta: "Active now", accent: "green" },
+              { title: "Closed Seeded Markets", body: "Number of seeded markets closed/resolved", value: "49", trend: "flat", delta: "Closed", accent: "rose" },
+            ],
+          },
+        ],
+      },
       steps: [
         { title: "Create", body: "Supporting Administration, Users, and AI generates markets " },
         { title: "Publish", body: "Multi-step market verification launch process, and fully automated market launch assisted with AI" },
@@ -476,6 +517,47 @@ export const locales = {
       highlightTitle: "관리자 및 운영 시스템",
       highlightStatement: "직관적인 관리 흐름으로\n시장을 안정적으로 운영하세요.",
       highlightCaption: "유동성, 사용자, 정산을 관리할 수 있는 완전한 백오피스 제품군을 제공합니다.",
+      dashboard: {
+        adminRole: "슈퍼 관리자",
+        adminName: "admin",
+        title: "Dashboard Report",
+        subtitle: "마켓 메이킹 성과 지표를 한눈에 볼 수 있는 운영 리포트",
+        status: "Live",
+        updated: "방금 업데이트됨",
+        refresh: "새로고침",
+        sections: [
+          {
+            title: "재무 성과",
+            metricCount: "5개 지표",
+            cards: [
+              { title: "총 실현 손익", body: "전체 MM 계정 기준 실현 손익", value: "-$51.74", trend: "down", delta: "12.4%", accent: "rose" },
+              { title: "미실현 손익", body: "전체 MM 계정 기준 미실현 손익", value: "-$203.18", trend: "down", delta: "8.7%", accent: "rose" },
+              { title: "거래량", body: "전체 MM 마켓 기준 총 USD 거래량", value: "$4,871.22", trend: "up", delta: "34.2%", accent: "blue" },
+              { title: "상환 / 병합", body: "MM 계정 기준 총 상환/병합 USD", value: "$347.09", trend: "up", delta: "6.1%", accent: "green" },
+              { title: "체결 주문", body: "내부 봇이 체결한 총 USD 주문 규모", value: "$589.33", trend: "up", delta: "19.8%", accent: "violet" },
+            ],
+          },
+          {
+            title: "자본 관리",
+            metricCount: "4개 지표",
+            cards: [
+              { title: "총 MM 자본", body: "가용 잔고 + 오픈 주문 + 포지션 비용", value: "$1,284.67", trend: "up", delta: "2.3%", accent: "amber" },
+              { title: "가용 잔고", body: "트레이딩에 사용 가능한 총 USD 잔고", value: "$762.44", trend: "flat", delta: "0.1%", accent: "green" },
+              { title: "총 포지션 비용", body: "전체 MM 계정의 진입 금액 합계", value: "$218.85", trend: "down", delta: "3.4%", accent: "blue" },
+              { title: "총 오픈 주문", body: "전체 MM 계정의 오픈 주문 총 USD 가치", value: "$303.38", trend: "up", delta: "11.7%", accent: "violet" },
+            ],
+          },
+          {
+            title: "마켓 통계",
+            metricCount: "3개 지표",
+            cards: [
+              { title: "총 시드 마켓 수", body: "MM이 시드한 전체 마켓 수", value: "117", trend: "up", delta: "26.1%", accent: "rose" },
+              { title: "운영 중인 시드 마켓", body: "현재 라이브 상태의 시드 마켓 수", value: "68", trend: "live", delta: "운영 중", accent: "green" },
+              { title: "종료된 시드 마켓", body: "종료/정산 완료된 시드 마켓 수", value: "49", trend: "flat", delta: "종료됨", accent: "rose" },
+            ],
+          },
+        ],
+      },
       steps: [
         { title: "생성", body: "관리 기능을 지원하며, 사용자와 AI가 시장을 생성합니다." },
         { title: "게시", body: "다단계 시장 검증 프로세스와 AI 지원 자동 게시 프로세스를 제공합니다." },
