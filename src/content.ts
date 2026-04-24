@@ -268,8 +268,8 @@ export const locales = {
       body: "More than prediction markets - Expand your platform's capabilities.",
       items: [
         {
-          title: "Xmarket",
-          body: "Xmarket is the first prediction platform built for creators.",
+          title: "Prediction Market",
+          body: "A prediction market platform built for creators and operators.",
           image: "https://rkctlxkchciefjtrwzht.supabase.co/storage/v1/object/public/lum/xpredi.webp",
         },
         {
@@ -280,7 +280,7 @@ export const locales = {
         {
           title: "Cross-Chain Bridge",
           body: "Let users move funds across different blockchains seamlessly.",
-          image: "https://rkctlxkchciefjtrwzht.supabase.co/storage/v1/object/public/lum/bridge.webp",
+          image: "https://rkctlxkchciefjtrwzht.supabase.co/storage/v1/object/public/lum/bridge%20(1).webp",
         },
         {
           title: "AI Analysis",
@@ -603,8 +603,8 @@ export const locales = {
       body: "예측 시장을 넘어 플랫폼의 기능을 확장하세요.",
       items: [
         {
-          title: "Xmarket",
-          body: "Xmarket은 크리에이터를 위해 설계된 첫 번째 prediction platform입니다.",
+          title: "Prediction Market",
+          body: "크리에이터와 운영사를 위해 설계된 prediction market 플랫폼입니다.",
           image: "https://rkctlxkchciefjtrwzht.supabase.co/storage/v1/object/public/lum/xpredi.webp",
         },
         {
@@ -615,7 +615,7 @@ export const locales = {
         {
           title: "Cross-Chain Bridge",
           body: "사용자가 서로 다른 블록체인 간에 자산을 자연스럽게 이동할 수 있도록 지원합니다.",
-          image: "https://rkctlxkchciefjtrwzht.supabase.co/storage/v1/object/public/lum/bridge.webp",
+          image: "https://rkctlxkchciefjtrwzht.supabase.co/storage/v1/object/public/lum/bridge%20(1).webp",
         },
         {
           title: "AI Analysis",
