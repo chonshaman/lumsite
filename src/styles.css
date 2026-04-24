@@ -1758,7 +1758,7 @@ input {
   gap: 0px;
   align-items: center;
   justify-content: center;
-  padding: 100px 50.5px;
+  padding: 120px 48px 160px;
   color: var(--ink);
   content-visibility: auto;
   contain-intrinsic-size: 1200px;
@@ -1803,7 +1803,7 @@ input {
   display: flex;
   justify-content: center;
   background: #fcfbfa;
-  padding: 100px 50.5px 72px;
+  padding: 100px 50.5px 128px;
   scroll-margin-top: 132px;
   content-visibility: auto;
   contain-intrinsic-size: 900px;
@@ -1813,7 +1813,7 @@ input {
   display: flex;
   width: min(100%, 1280px);
   flex-direction: column;
-  gap: 36px;
+  gap: 0;
 }
 
 .otherProductsHeader {
