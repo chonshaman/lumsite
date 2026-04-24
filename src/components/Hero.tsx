@@ -135,6 +135,19 @@ export function Hero({ hero, ui, footer }: HeroProps) {
           <img src={hero.image} alt="" decoding="async" fetchPriority="high" />
         </motion.div>
       </section>
+
+      <motion.a
+        className="heroScrollCue"
+        href="#identity"
+        aria-label="Scroll down"
+        initial={{ y: 20, opacity: 0 }}
+        animate={isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+        transition={{ duration: 0.72, ease: introEase, delay: 0.82 }}
+      >
+        <span className="heroScrollMouse" aria-hidden="true">
+          <span className="heroScrollDot" />
+        </span>
+      </motion.a>
     </header>
   );
 }

@@ -508,6 +508,7 @@ input {
 }
 
 .hero {
+  position: relative;
   overflow: hidden;
   background: #f4f4f6;
   padding-top: 92px;
@@ -716,6 +717,39 @@ input {
   display: flex;
   width: min(100%, 276px);
   margin-top: 24px;
+}
+
+.heroScrollCue {
+  position: absolute;
+  right: 48px;
+  bottom: 0;
+  display: inline-flex;
+  color: #2b8d44;
+  z-index: 3;
+}
+
+.heroScrollCue:hover .heroScrollMouse,
+.heroScrollCue:focus-visible .heroScrollMouse {
+  border-color: rgba(43, 141, 68, 0.82);
+}
+
+.heroScrollMouse {
+  position: relative;
+  display: inline-flex;
+  width: 24px;
+  height: 40px;
+  justify-content: center;
+  border: 1.5px solid rgba(43, 141, 68, 0.5);
+  border-radius: 999px;
+}
+
+.heroScrollDot {
+  width: 4px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: currentColor;
+  animation: heroScrollDot 1.45s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 .heroButton {
@@ -2394,7 +2428,7 @@ input {
 }
 
 .featureCard.reveal {
-  --reveal-y: 58px;
+  --reveal-y: 82px;
   transition-duration: 860ms;
 }
 
@@ -2562,6 +2596,27 @@ input {
 
   100% {
     transform: translate3d(130%, -50%, 0);
+  }
+}
+
+@keyframes heroScrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  68% {
+    transform: translateY(14px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
   }
 }
 
